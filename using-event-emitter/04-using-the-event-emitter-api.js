@@ -3,7 +3,7 @@
  */
 
 /**
- *  1.any object that implements the event emitter pattern implements a set of methods
+ * 1.any object that implements the event emitter pattern implements a set of methods
  *      |-- addListener and on: to add an event listener to an event type
  *      |-- once: to attach an event listener to a given event type that will be called at most once
  *      |-- removeListener: to remove a specific event listner of a given event
@@ -34,7 +34,8 @@ var EventEmitter = require("events").EventEmitter;
 // here is the MyClass constructor;
 var MyClass = function(){
 
-}
+};
+
 util.inherits(MyClass, EventEmitter); //sets up the prototype chain so that you get the EventEmitter proto methods available to your MyClass instances.
 
 MyClass.prototype.someMethod = function(){
