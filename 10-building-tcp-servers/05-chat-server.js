@@ -26,7 +26,7 @@ server.on('connection', function(socket){
         });
     });
 });
-server.listen(4001);
+server.listen(4000);
 
 /**
  * A tcp server will emit certain events during its lifecycle, namely, 'listening' events when you set it
