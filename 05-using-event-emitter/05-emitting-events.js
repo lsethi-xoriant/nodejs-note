@@ -14,4 +14,4 @@ util.inherits(Ticker, EventEmitter);
 var ticker = new Ticker();
 ticker.on('tick', function(){ // 监听构造函数中发起的事件
     console.log(new Date());
-})
+});
