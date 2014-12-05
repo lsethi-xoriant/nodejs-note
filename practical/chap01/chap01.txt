@@ -1,0 +1,80 @@
+1.launching node.js scripts
+	|-- if all we need is a quick set of statements, there's a `-e` option that allows us to
+		run inline js/nodejs, for example, `node -e "console.log(new Date());"`
+	|-- if the nodejs program uses environmental variables, it's possible to set them right
+		before the node command, for example:
+		`NODE_ENV=production API_KEY=kdsjfkajf node server.js`
+
+2.define/create a function
+	the three most common ways to define/create a function are to use a named expression, an anonymous expression
+	assigned to a variable, or both.
+	|-- named expression
+		```js
+		function f() {
+			return true;
+		}
+		```		
+
+	|-- an anonymous function expression 
+		```js
+		var f = function() {
+			return true;
+		}
+		```
+
+	a function with a property(remember, functions are just objects that can be invoked/initialized) is as follows:
+		```js
+		var f = function() {
+			console.log('boo');
+		}
+		f.boo = 1;
+		f();
+		console.log(f.boo);
+		```
+
+3.prototypal nature
+	theare are no classes in js because objects inherit directly from other objects, which is called `prototypal` inheritance
+	There are a few types of inheritance patterns in js
+	|-- Classical
+	|-- Pseudoclassical
+	|-- Functional
+
+	This is an example of the functional inheritance pattern: see demo02.js
+
+4.nodejs globals and reserved keywords
+	|-- process
+		each node.js script that runs is, in essence, a process. for example, `ps aux | grep 'node'` outputs all nodejs programs running  on a machine.
+
+		process.id: process id
+		process.cwd(): current workking directory
+
+5.module
+	for core nodejs modules, use the name without any path -- for example, require('name').
+	the same goes for modules in the `node_modules` folder
+
+	for all other file(i.e, not modules). use `.` with or without a file extension. an example
+	follows:
+	```
+	var keys = require('./keys.js');
+	```
+
+	in addition, for including files, it's possible to use longer statements with `_dirname`
+	and path.join(), `require(path.join(_dirname, 'routes', 'messages))`; this is a recommended
+	approach, because path.join() will produce a path with valid slashes (forward or backward depending on your os)
+
+	if require() points to a folder, nodejs attempts read the `index.js` file in that folder
+
+6. __dirname vs process.cwd
+    |-- __dirname
+        is an absolute path to the file in which the global variable is called
+        ps: 就是被运行脚本的绝对路径
+    |-- process.cwd
+        is an absolute path to the process that runs the script.
+        ps: 在哪个目录下使用了 `node ...`
+    the latter might not be the same as the formmer if we started the program from
+    a different folder, such as `node ./code/programs.js`
+
+7.callback
+    callback code can be rewritten with the use of event emitters or promises, or by
+    using the async library.
+	
