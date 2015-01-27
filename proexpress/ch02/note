@@ -1,0 +1,27 @@
+1. mvc structure
+```
+|-- app.js
+|-- package.json
+|-- views
+    |-- *.jade
+|-- routes
+    |-- *.js
+|-- models
+    |-- *.js
+|-- config
+    |-- *.js
+|-- public
+    |-- javascript
+        |-- *.js
+    |-- images
+        |-- *.png
+    |-- stylesheets
+        |-- *.less
+|-- test
+    |-- *.js
+|-- logs
+    |-- *.log
+```
+
+2. __dirname
+    the _dirname variable returns the system path to the module being executed
