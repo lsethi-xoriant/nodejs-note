@@ -82,4 +82,17 @@
  *      If you don't want to apply cors headers to your server, then the js object literal notation with prefix(JSONP) is the
  *      way to go. Express.js has a res.jsonp() method that makes using JSONP a breeze
  *
+ *      for the requests with a query string param `?cb=update`, we can use
+ *      ```
+ *      app.set('jsonp callback name', 'cb');
+ *      // 在使用res.jsonp时就会把值包装成jsonp，如果没有写成cb,那么不会包装，原样输出
+ *      ```
+ *  |-- json replacer and json spaces
+ *      when we use the express.js method res.json(), we can apply special parameters: replacer and spaces. These parameters
+ *      are passed to all JSON.stringify() functions in the scope of the application
+ *  |-- case sensitive routing
+ *      The `case sensitive` routing flag should be self-explanatory. We disregard the case of the url paths when it is false
+ *      which is the default value, and do otherwise when the value is set to true.For example, if we have
+ *      `app.enable('case sensitive routing')` when /users and /Users won't be the same. It's best to have this option disabled
+ *      for the sake of avoiding confusion
  */

@@ -9,8 +9,16 @@
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script>
     $('#btn').click(function () {
-        createScript('http://localhost:3001/jsonp?callback=func');
-    });
+//        createScript('http://localhost:3001/jsonp?callback=func'); // 方法1
+        $.ajax({
+            url: 'http://localhost:3001/jsonp',
+            dataType: 'jsonp',
+            jsonp: 'callback',
+            success: function (data) {
+                console.log("data\n", data);
+            }
+        })
+    }); 
     function createScript(src) {
         var str = '\<script\>\<\/script\>';
         $(str).attr('src', src).appendTo('body');
