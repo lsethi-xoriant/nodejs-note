@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<button id="btn">get</button>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script>
+    $('#btn').click(function () {
+        createScript('http://localhost:3001/jsonp?callback=func');
+    });
+    function createScript(src) {
+        var str = '\<script\>\<\/script\>';
+        $(str).attr('src', src).appendTo('body');
+    }
+    function func(data) {
+        console.log(data);
+    }
+</script>
+</body>
+</html>
