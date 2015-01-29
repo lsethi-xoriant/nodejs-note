@@ -95,4 +95,32 @@
  *      which is the default value, and do otherwise when the value is set to true.For example, if we have
  *      `app.enable('case sensitive routing')` when /users and /Users won't be the same. It's best to have this option disabled
  *      for the sake of avoiding confusion
+ *
+ *  |-- strict routing
+ *      strict routing deals with cases of trailing slashes in URLs, with strict routing` enabled, such as
+ *      app.set('strict routing', true);the path will be treated differently; for example, /user and /user/
+ *      默认设置是false.
+ *  |-- x-powered-by
+ *      this option is enabled by default
+ *  |-- etag
+ *      ETag is a caching tool. if content doesn't change on a specific url, the etag will remain the same and the browser
+ *      will use the cache.
+ *  |-- query parser
+ *      a `query string` is data sent in the url after the question mark. This format needs to be parsed into js/node.js object
+ *      Express automatically includes this query parsing for our convenience.
+ *      ```
+ *      app.set('query parser', true);
+ *      ```
+ *
+ * 3. Environment
+ *      As many of you know, most applications don't run in a single environment. Those environments ususally include at
+ *      least development, testing and production. Each of the environments puts a different requirement on the app. For example
+ *      in development the app error messaging needs to be as verbose(详细) as possible, while in production it needs to be user
+ *      friendly and not compromise any system or user's personally identifiable information data to hackers
+ *
+ *      deprecated(弃用)
+ *
+ *      staging:
+ *      通常一个web项目都需要一个staging环境，一来给客户做演示，二来可以作为production server的一个预演，正式发布新功能前能够及早
+ *      发现问题。
  */

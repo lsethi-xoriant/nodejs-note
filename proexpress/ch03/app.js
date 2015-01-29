@@ -1,8 +1,8 @@
 var book = {
     name: 'Practical Node.js',
-    publisher: 'Apress',
+    publisher: 'Apressr',
     keywords: 'nodejs express.js',
-    discount: 'PNJS15'
+    discount: 'PNJS157'
 };
 var express = require("express");
 var path = require("path");
@@ -25,9 +25,14 @@ app.set('json replacer', function (key, value) {
 app.set('json spaces', 2);
 
 app.set('case sensitive routing', true);
+app.set('strict routing', true);
 
 
 app.set('jsonp callback name', 'cb');
+//app.set('x-powered-by', false);
+//app.set('etag', false);
+//app.set('query parser',  true);
+app.set('subdomain offset', 3);
 app.get('/jsonp', function (req, res) {
     res.jsonp(book);
 });
@@ -35,6 +40,38 @@ app.get('/jsonp', function (req, res) {
 app.get('/json', function (req, res) {
     res.json(book);
 });
+
+app.get('/users', function (req, res) {
+    var q = req.query;
+    console.log("q\n", q);
+    console.log("req.subdomains\n", req.subdomains);
+    res.send(book);
+});
+app.get('/users/', function (req, res) {
+    res.json('users/');
+});
+
+app.get('*', function (req, res) {
+    res.send('pro express.js configuratin');
+});
+
+if (app.get('env') === 'developement') {
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+} else {
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: {}
+        });
+    });
+}
 
 var server = app.listen(app.get('port'), function () {
     console.log('express server listening on port:', server.address().port);
