@@ -30,6 +30,7 @@ app.use(express.static('public'));
 app.use('/upload', busboy({immediate: true}));
 app.use('/upload', function (req, res) {
     req.busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
+        console.log("fieldname, filename\n", fieldname, filename);
         file.on('data', function (data) {
             fs.writeFile('upload' + fieldname + filename, data);
         });
