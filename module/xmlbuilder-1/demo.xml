@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<xml>
+    <ToUserName>
+        <![CDATA[tsq]]>
+    </ToUserName>
+    <FromUserName>
+        <![CDATA[qst]]>
+    </FromUserName>
+    <CreateTime>1423116319555</CreateTime>
+    <MsgType>
+        <![CDATA[text]]>
+    </MsgType>
+    <Content>
+        <![CDATA[this is a text]]>
+    </Content>
+    <MsgId>
+        <![CDATA[333333333]]>
+    </MsgId>
+</xml>
