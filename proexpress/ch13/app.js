@@ -24,7 +24,7 @@ if (cluster.isMaster) {
     console.log('worker (%s) is now listening to http://localhost:%s', cluster.worker.process.pid, port);
     var app = express();
     app.get('*', function (req, res) {
-        res.send('hello world');
+        res.status(200).end(cluster.worker.process.pid.toString() + '\n');
     });
     app.listen(port);
 }
