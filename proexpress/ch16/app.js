@@ -28,10 +28,12 @@ app.use(errorhandler());
 var server = http.createServer(app);
 var io = require("socket.io").listen(server);
 io.sockets.on('connection', function (socket) {
-    socket.on('messageChange', function (data) {
-        console.log(data);
-        socket.emit('receive', data.message.split('').reverse().join(''));
+    socket.join('test');
+    socket.on('move', function (data) {
+        console.log("data\n", data);
+        io.sockets.in('test').emit('receive', data.msg);
     });
+
 });
 
 server.listen(app.get('port'), function () {
