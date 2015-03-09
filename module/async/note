@@ -1,0 +1,8 @@
+1. Async函数介绍
+    async主要实现了三个部分的流程控制功能:
+    |-- 集合: Collections
+    |-- 流程控制: Control Flow
+
+2. 集合: Collections
+    |-- each:
+        如果相对同一个集合中的所有元素都执行同一个异步操作
