@@ -1,0 +1,35 @@
+<!--
+ The use of this in the global scope
+
+ In the global scope, when the code is executing in the browser, all global variable and functions are
+ defined on the window object(not in strict mode)
+-->
+<html>
+<body>
+<script>
+    var fristName = 'Peter';
+    var lastName = 'Ally';
+
+    function showFullName() {
+        /**
+            this inside this function will have the value of the window object
+            because the showFullName() function is defined in the global scope,
+            just like the firstName and lastName
+         */
+        console.log(this.fristName + ' ' + this.lastName);
+    }
+    var person = {
+        firstName: 'Penelope',
+        lastName: 'Barrymore',
+        showFullName: function () {
+            // 'this' on the line below refers to the person object, because the showFullName function
+            // will be invoke by person object
+            console.log(this.firstName + ' ' + this.lastName);
+        }
+    };
+    showFullName(); //Peter Ally
+    window.showFullName();//Peter Ally
+    person.showFullName();// Penelope Barrymore
+</script>
+</body>
+</html>

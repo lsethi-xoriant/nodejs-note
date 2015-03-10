@@ -1,0 +1,63 @@
+<!--
+
+ Fix 'this' inside closure
+
+ Another instance when 'this' is misunderstood is when we use an inner method (a closure). It is
+ important to take note that closures cannot access the outer function's this variable by using
+ the 'this' keyword because the 'this' variable is accessible only by the function itself, not by
+ inner functins
+-->
+
+
+<html>
+<body>
+<script>
+    var user = {
+        tournament: 'The Masters',
+        data: [
+            {name:'T', age: 37},
+            {name:'P', age: 43}
+        ],
+        clickHandler: function () {
+            console.log("this.data\n", this.data);
+            this.data.forEach(function (person) {
+                console.log('what is this referring to?' + this);
+                console.log(person.name + 'is playing at:' + this.tournament); // undefined
+                // this inside the anonymous function cannot access the outer function's this, so it is
+                // bound to the global window object, when 'strict mode' is not being used
+            })
+        }
+    };
+    user.clickHandler();
+</script>
+<script>
+    // solution to maintain this inside anonymous functions
+    /**
+     To fix the problem with using this inside the anonymous function passed to the forEach method,
+     we use a common practice in js and set the this value to another variable before we enter the
+     forEach
+     */
+    console.log("**********华丽的分割线************");
+    var user = {
+        tournament: 'The Masters',
+        data: [
+            {name:'T', age: 37},
+            {name:'P', age: 43}
+        ],
+        clickHandler: function (event) {
+            // To capture the value of 'this' when it refers to the user object, we have to set it to
+            // another variable here:
+            // We set the value of 'this' to theUserObj variable, so we can use it later
+            var theUserObj = this;
+            this.data.forEach(function (person) {
+                console.log('what is this referring to?' + this);
+                console.log(person.name + 'is playing at:' + theUserObj.tournament); // undefined
+                // this inside the anonymous function cannot access the outer function's this, so it is
+                // bound to the global window object, when 'strict mode' is not being used
+            })
+        }
+    };
+    user.clickHandler();
+</script>
+</body>
+</html>

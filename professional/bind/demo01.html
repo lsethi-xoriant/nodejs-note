@@ -1,0 +1,87 @@
+
+<!--
+ Functions are object in Javascript. And as objects, functions have methods, including the
+ powerful apply, call, and bind method.On the one hand, apply and call are nearly identical
+ and are frequently used in Javascript for borrowing methods and for setting the 'this' value
+ explicity.We also use Apply for variable-arity functions
+
+ While Apply and Call come with ECMAScript3 (available on IE 6,7,8, and modern browsers) added
+ the Bind method.
+-->
+<html>
+<body>
+<button>Btn</button>
+<input type="text"/>
+<script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+<script>
+    var user = {
+        data: 'tom',
+        clickHandler: function (event) {
+            console.log("**********************");
+            console.log("this.data\n", this.data);
+            $('input').val(this.data);
+        }
+    };
+    $('button').click(user.clickHandler.bind(user));
+    $('button').click(function () {
+        // you can pass an anonymous callback function to the click() method and jQuery
+        // will bind 'this' inside the anonymous function to the button object
+        console.log(this);
+        console.log(Function.prototype);
+    })
+</script>
+<script>
+    // This data variable is a global variable
+    var data = [{name:'Samantha', age:12}, {name:'Alexis', age: 14}];
+    var user = {
+        data: [
+            {name:"T", age: 36},
+            {name:"L", age: 37}
+        ],
+        showData: function (event) {
+            console.log(this.data[0].name);
+        }
+    };
+    /**
+     The 'this' value is also bound to another object if we assign the method to a variable
+     */
+//    var showDataVar = user.showData;
+    // Now the we get the value from the user object because the this keyword is bound to the user object
+    var showDataVar = user.showData.bind(user);
+    showDataVar(); // Samantha(from the global data array, not from the local data array);
+</script>
+
+<script>
+    var data = [{name:'Samantha', age:12}, {name:'Alexis', age: 14}];
+    var user = {
+        data: [
+            {name:"T", age: 36},
+            {name:"L", age: 37}
+        ],
+        showData: function (event) {
+            console.log(this.data[0].name);
+        }
+    };
+    // Here we have a cars object that does not have a method to print its data to the console
+    var cars = {
+        data: [
+            {name: 'Honda', age: 14},
+            {name: 'Tesla', age: 2}
+        ]
+    };
+
+    /**
+     In Js, we can pass function around, return them, borrow them, and the like. And the bind() method
+     makes it super easy to borrow methods
+
+     */
+    cars.showData = user.showData.bind(cars);
+    cars.showData(); // Honda
+    /**
+     One problem with this example is that we are adding a new method(showData) on the cars object and
+     we might not want to do that just to borrow a method because the cars object might alreay have a
+     property or method name showData.We don't want to override it accidentally.it is best to borrow a method using either the Apply or Call method.
+     */
+</script>
+</body>
+</html>

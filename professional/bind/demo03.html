@@ -1,0 +1,87 @@
+<html>
+<body>
+<script>
+    /**
+     The Apply and Call methods are two of the most often used Function methods in JavaScript, and for good
+     reason: they allow us to
+     |-- borrow functions
+     |-- set the 'this' value in function invocation
+     |-- the apply function in particular allows us to execute a function with an array of parameters,
+     such that each parameter is passed to the function individually when the function executes
+     great for variadic functions;
+
+     */
+
+    /**
+     The first parameter in the call and apply methods set the this value to the object
+     that the function is invoked upon
+     */
+
+// global var for demo
+    var avgScore = 'global avgScore';
+
+    // global function
+    function avg(arrayOfScores) {
+        // Add all the scores and return the total
+        var sumOfScores = arrayOfScores.reduce(function (prev, cur, i, array) {
+            return prev + cur;
+        });
+
+        // the 'this' keyword here will be bound to the global object, unless we set the 'this' with call
+        // or apply
+        this.avgScore = sumOfScores / arrayOfScores.length;
+    }
+
+    var gameController = {
+        scores: [20, 34, 55, 46, 77],
+        avgScore: null
+    };
+    avg(gameController.scores);
+    console.log(avgScore);
+    console.log(gameController.avgScore);
+
+    // reset the global avgScore
+    avgScore = 'global avgScore';
+    // To set the 'this' value explicity, so that 'this' is bound to the gameController
+    // We use the call() method
+
+    // The first argument to call() sets the 'this' value. It is set to the gameController object
+    // The other argument after the argument are passed as parameters to the avg() function
+    avg.call(gameController, gameController.scores);
+    console.log(gameController);
+
+</script>
+
+<script>
+    /**
+     The apply and call methods are almost identical when setting the 'this' value except that you
+     pass the function parameters to apply() as an array, while you have to list the parameters 
+     individually to pass them to the call() method.
+     
+     apply() method also has another feature that the call() method doesn't have
+     */
+    
+    var clientData = {
+        id: 0945,
+        fullName: 'Not set',
+        setUserName: function (firstName, lastName) {
+            this.fullName = firstName + ' ' + lastName;
+        }
+    };
+
+    function getUserInput(firstName, lastName, callback, callbackObj) {
+        // The use of the Apply method below will set the 'this' value to callbackObj
+        callback.apply(callbackObj, [firstName, lastName]);
+    }
+    
+    // The clientData object will be used by the Apply method to set the 'this' value
+    getUserInput('Barack', 'Obama', clientData.setUserName, clientData);
+    console.log(clientData.fullName);  // Barack Obama
+
+    /**
+     The Apply Call, and Bind methods are all used to set the 'this' value when invoking a
+     method.
+     */
+</script>
+</body>
+</html>
