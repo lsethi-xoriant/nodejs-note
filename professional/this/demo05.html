@@ -1,0 +1,57 @@
+<html>
+<body>
+<script>
+    /**
+     Fix this when method is assigned to a variable
+     */
+
+// this data variable is a global variable
+    var data = [
+        {name: 'Samantha', age: 12},
+        {name: 'Alexis', age: 14}
+    ];
+
+    var user = {
+        data: [
+            {name: 'T woods', age: 37},
+            {name: 'P Mickelson', age: 43}
+        ],
+        showData: function (event) {
+            console.log(this.data);
+        }
+    };
+    var showUserData = user.showData;
+
+    // when we execute the showUserData function, the values printed to the console are from the
+    // global data array, not from the data array in the user object
+    showUserData();
+</script>
+<script>
+    /**
+     Solution for maintain this when method is assigned to a variable
+     we can fix this problem by specifically setting the this value with the bind method
+     */
+
+// this data variable is a global variable
+    var data = [
+        {name: 'Samantha', age: 12},
+        {name: 'Alexis', age: 14}
+    ];
+
+    var user = {
+        data: [
+            {name: 'T woods', age: 37},
+            {name: 'P Mickelson', age: 43}
+        ],
+        showData: function (event) {
+            console.log(this.data[0]);
+        }
+    };
+    var showUserData = user.showData.bind(user);
+
+    // when we execute the showUserData function, the values printed to the console are from the
+    // global data array, not from the data array in the user object
+    showUserData();
+</script>
+</body>
+</html>

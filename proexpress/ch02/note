@@ -1,6 +1,6 @@
 1. mvc structure
 ```
-|-- demo01.js
+|-- demo01.html
 |-- package.json
 |-- views
     |-- *.jade

@@ -39,7 +39,7 @@
 	|-- Pseudoclassical
 	|-- Functional
 
-	This is an example of the functional inheritance pattern: see demo02.js
+	This is an example of the functional inheritance pattern: see demo02.html
 
 4.nodejs globals and reserved keywords
 	|-- process

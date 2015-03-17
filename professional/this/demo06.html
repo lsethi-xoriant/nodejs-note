@@ -1,0 +1,77 @@
+<html>
+<body>
+<script>
+    /**
+     Fix this when borrowing methods:
+     We have two objects. One of them has a method called avg() that the other
+     doesn't have So we will borrow the avg() method
+     */
+
+            
+    var gameController = {
+        scores: [20, 34, 55, 46, 77],
+        avgScore: null,
+        players: [
+            {name: 'Samantha', age: 12, playerID: 987},
+            {name: 'Alexis', age: 14, playID: 87}
+        ]
+    };
+    var appController = {
+        scores: [900, 845, 809, 950],
+        avgScore: null,
+        avg: function () {
+            var sumOfScores = this.scores.reduce(function (pre, cur, index, array) {
+                return pre + cur;
+            });
+            this.avgScore = sumOfScores / this.scores.length;
+        }
+    };
+    gameController.avgScore = appController.avg();
+    console.log(gameController.avgScore); // null
+    console.log(appController);
+</script>
+<script>
+    /**
+     Solution for fixing this when borrowing methods
+     To fix the issue and make sure that this inside the appController.avg() method refers to
+     gameController, we can use the apply() method thus.
+     */
+    var gameController = {
+        scores: [20, 34, 55, 46, 77],
+        avgScore: null,
+        players: [
+            {name: 'Samantha', age: 12, playerID: 987},
+            {name: 'Alexis', age: 14, playID: 87}
+        ]
+    };
+    var appController = {
+        scores: [900, 845, 809, 950],
+        avgScore: null,
+        avg: function () {
+            var sumOfScores = this.scores.reduce(function (pre, cur, index, array) {
+                return pre + cur;
+            });
+            this.avgScore = sumOfScores / this.scores.length;
+        }
+    };
+    // Note that we are using the apply() method, so the 2nd argument has to be an array--the
+    // arguments to pass to the appController.avg() method
+    appController.avg.apply(gameController, gameController.scores);
+
+    // The avgScore property was successfully set on the gameController object, even thoug we
+    // borrowed the avg() method from the appController object
+    console.log(gameController.avgScore); // 46.4
+    console.log(appController.avgScore); // null
+
+    /**
+     * The gameControoler object borrows the appController's avg() method. The 'this' value inside
+     * the appController.avg() method will be set to the gameController object because we pass the
+     * gameController object as the first parameter to the apply() method.The first parameter in
+     * the apply method always sets the value of 'this' explicitly.
+     */
+
+
+    // Always remember that 'this' is assigned the value of the object that invoked the this function
+</script>
+</body>
+</html>
